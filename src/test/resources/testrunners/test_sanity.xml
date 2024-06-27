@@ -6,9 +6,9 @@
 
 	<listeners>
 		<listener
-			class-name="com.qa.opencart.listeners.ExtentReportListener" />
-		<listener
 			class-name="com.qa.opencart.listeners.TestAllureListener" />
+		<!--<listener
+			class-name="com.qa.opencart.listeners.ExtentReportListener" /> -->
 	</listeners>
 
 	<test name="Login Page Test">
@@ -24,6 +24,7 @@
 			<class name="com.qa.opencart.tests.AccountsPageTest" />
 		</classes>
 	</test>
+	
 	
 	<test name="Product Info Page Test">
 		<parameter name="browser" value="edge"/>

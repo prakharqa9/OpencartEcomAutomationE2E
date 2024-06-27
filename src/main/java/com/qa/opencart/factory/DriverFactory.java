@@ -79,11 +79,7 @@ public class DriverFactory {
 		String envName = System.getProperty("env");
 
 		if (envName == null) {
-			System.out.println("#### DEFAULT ENV Name #####");
-			System.out.println("#                         #");
 			System.out.println("#            QA           #");
-			System.out.println("#                         #");
-			System.out.println("###########################");
 			try {
 				ip = new FileInputStream(AppConstants.CONFIG_QA_FILE_PATH);
 			} catch (FileNotFoundException e) {

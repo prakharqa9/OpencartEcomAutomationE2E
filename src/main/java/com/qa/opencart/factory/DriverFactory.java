@@ -96,9 +96,7 @@ public class DriverFactory {
 			try {
 				switch (envName.trim().toLowerCase()) {
 				case "qa":
-					System.out.println("####     ENV Name      ####");
 					System.out.println("#            QA           #");
-					System.out.println("###########################");
 					ip = new FileInputStream(AppConstants.CONFIG_QA_FILE_PATH);
 					break;
 				case "stage":

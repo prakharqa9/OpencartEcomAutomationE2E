@@ -5,11 +5,14 @@ import java.util.Map;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
 import com.qa.opencart.constants.AppConstants;
 import com.qa.opencart.errors.AppError;
+import com.qa.opencart.listeners.ExtentReportListener;
+import com.qa.opencart.listeners.TestAllureListener;
 import com.qa.opencart.utils.ExcelUtil;
 
 import io.qameta.allure.Description;
@@ -22,6 +25,8 @@ import io.qameta.allure.Story;
 
 @Epic("Epic 102: Open Cart Application with Selected Product Workflow")
 @Story("User Story 103: Test product page information for Open Cart Application")
+
+@Listeners({TestAllureListener.class, ExtentReportListener.class})
 public class ProductInfoPageTest extends BaseTest{
 	
 	@BeforeClass

@@ -92,38 +92,28 @@ public class DriverFactory {
 			try {
 				switch (envName.trim().toLowerCase()) {
 				case "qa":
-					System.out.println("#            QA           #");
+					System.out.println("#        ENV Name:    QA           #");
 					ip = new FileInputStream(AppConstants.CONFIG_QA_FILE_PATH);
 					break;
 				case "stage":
-					System.out.println("####     ENV Name      ####");
-					System.out.println("#          STAGE          #");
-					System.out.println("###########################");
+					System.out.println("#        ENV Name:  STAGE          #");
 					ip = new FileInputStream(AppConstants.CONFIG_STAGE_FILE_PATH);
 					break;
 				case "dev":
-					System.out.println("####     ENV Name      ####");
-					System.out.println("#           DEV           #");
-					System.out.println("###########################");
+					System.out.println("#         ENV Name:  DEV           #");
 					ip = new FileInputStream(AppConstants.CONFIG_DEV_FILE_PATH);
 					break;
 				case "uat":
-					System.out.println("####     ENV Name      ####");
-					System.out.println("#           UAT           #");
-					System.out.println("###########################");
+					System.out.println("#      ENV Name:      UAT           #");
 					ip = new FileInputStream(AppConstants.CONFIG_UAT_FILE_PATH);
 					break;
 				case "prod":
-					System.out.println("####     ENV Name      ####");
-					System.out.println("#          PROD           #");
-					System.out.println("###########################");
+					System.out.println("#         ENV Name:  PROD           #");
 					ip = new FileInputStream(AppConstants.CONFIG_FILE_PATH);
 					break;
 
 				default:
-					System.out.println("############ ENV ###########");
 					System.out.println("#        INVALID ENV       #");
-					System.out.println("############################");
 					throw new FrameworkException("=== WRONG ENV PASSED ===");
 				}
 			} catch (FileNotFoundException e) {

@@ -22,7 +22,7 @@ import com.qa.opencart.exceptions.FrameworkException;
 public class DriverFactory {
 	WebDriver driver;
 	Properties prop;
-	
+
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
 
 	/**
@@ -56,15 +56,16 @@ public class DriverFactory {
 
 		return getDriver();
 	}
-	
+
 	/**
 	 * get the local thread copy of the driver
+	 * 
 	 * @return
 	 */
 	public static WebDriver getDriver() {
 		return tlDriver.get();
 	}
-	
+
 	/**
 	 * This method is used to initialize the properties from the .properties file
 	 * 
@@ -79,16 +80,13 @@ public class DriverFactory {
 		String envName = System.getProperty("env");
 
 		if (envName == null) {
-			System.out.println("#            QA           #");
+			System.out.println("#      Default ENV:  QA      #");
 			try {
 				ip = new FileInputStream(AppConstants.CONFIG_QA_FILE_PATH);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 		} else {
-//			System.out.println("############ ENV Name ############");
-//			System.out.println("              " + envName);
-//			System.out.println("##################################");
 			try {
 				switch (envName.trim().toLowerCase()) {
 				case "qa":
@@ -130,13 +128,14 @@ public class DriverFactory {
 		return prop;
 
 	}
-	
+
 	/**
 	 * take screenshot
 	 */
 	public static String getScreenshot(String methodName) {
-		File srcFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);//temp location
-		String path = System.getProperty("user.dir")+"/screenshots/"+methodName+"_"+System.currentTimeMillis()+".png";
+		File srcFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);// temp location
+		String path = System.getProperty("user.dir") + "/screenshots/" + methodName + "_" + System.currentTimeMillis()
+				+ ".png";
 		File destination = new File(path);
 		try {
 			FileHandler.copy(srcFile, destination);
@@ -145,22 +144,5 @@ public class DriverFactory {
 		}
 		return path;
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

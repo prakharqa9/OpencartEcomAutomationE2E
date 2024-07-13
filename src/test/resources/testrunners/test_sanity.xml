@@ -21,7 +21,7 @@
 		</classes>
 	</test>
 	
-	<!--	
+		
 	<test name="Accounts Page Test">
 		<parameter name="browser" value="firefox" />
 		<classes>
@@ -29,7 +29,7 @@
 		</classes>
 	</test>
 
-
+	<!--
 	<test name="Product Info Page Test">
 		<parameter name="browser" value="edge" />
 		<classes>

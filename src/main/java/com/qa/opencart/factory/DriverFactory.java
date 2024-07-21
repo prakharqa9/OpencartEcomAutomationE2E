@@ -22,7 +22,8 @@ import com.qa.opencart.exceptions.FrameworkException;
 public class DriverFactory {
 	WebDriver driver;
 	Properties prop;
-
+	OptionsManager optionsManager;
+	
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
 
 	/**
@@ -33,6 +34,7 @@ public class DriverFactory {
 	public WebDriver initDriver(Properties prop) {
 
 		String browserName = prop.getProperty("browser");
+		optionsManager = new OptionsManager(prop);
 
 		System.out.println("browser name is : " + browserName);
 		switch (browserName.toLowerCase().trim()) {

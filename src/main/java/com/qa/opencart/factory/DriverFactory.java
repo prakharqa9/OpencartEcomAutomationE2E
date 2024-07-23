@@ -5,6 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+//import java.net.URL;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -13,6 +17,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.qa.opencart.constants.AppConstants;
 import com.qa.opencart.errors.AppError;
@@ -27,8 +32,7 @@ public class DriverFactory {
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
 
 	/**
-	 * This used to initialize the driver on the basis of given browser name.
-	 * 
+	 * This used to initialize the driver on the basis of given browser name. 
 	 * @param browserName
 	 */
 	public WebDriver initDriver(Properties prop) {
@@ -39,13 +43,31 @@ public class DriverFactory {
 		System.out.println("browser name is : " + browserName);
 		switch (browserName.toLowerCase().trim()) {
 		case "chrome":
-			tlDriver.set(new ChromeDriver());
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				//run tc on remote machine/grid
+				initRemoteDriver("chrome");
+			}else {
+				//run in local
+				tlDriver.set(new ChromeDriver());
+			}
 			break;
 		case "firefox":
-			tlDriver.set(new FirefoxDriver());
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				//run tc on remote machine/grid
+				initRemoteDriver("firefox");
+			}else {
+				//run in local
+				tlDriver.set(new FirefoxDriver());
+			}
 			break;
 		case "edge":
-			tlDriver.set(new EdgeDriver());
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				//run tc on remote machine/grid
+				initRemoteDriver("edge");
+			}else {
+				//run in local
+				tlDriver.set(new EdgeDriver());
+			}
 			break;
 		default:
 			System.out.println("Please pass the right browser name... " + browserName);
@@ -57,6 +79,33 @@ public class DriverFactory {
 		getDriver().get(prop.getProperty("url"));
 
 		return getDriver();
+	}
+	
+	/**
+	 * Initialize driver to run test cases on remote (grid) machine
+	 * @param browserName
+	 */
+	private void initRemoteDriver(String browserName) {
+		System.out.println("Running it on GRID... with browser: "+browserName);
+		try {
+		switch (browserName) {
+		case "chrome":
+				tlDriver.set(new RemoteWebDriver(new URI(prop.getProperty("huburl")).toURL(),optionsManager.getChromeOptions()));
+			break;
+		case "firefox":
+			tlDriver.set(new RemoteWebDriver(new URI(prop.getProperty("huburl")).toURL(),optionsManager.getFirefoxOptions()));
+		break;
+		case "edge":
+			tlDriver.set(new RemoteWebDriver(new URI(prop.getProperty("huburl")).toURL(),optionsManager.getEdgeOptions()));
+		break;
+		
+		default:
+			System.out.println("Please pass the right browser on grid");
+			throw new BrowserException(AppError.BROWSER_NOT_FOUND);
+		}
+		}catch (MalformedURLException | URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

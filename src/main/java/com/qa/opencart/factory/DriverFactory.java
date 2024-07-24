@@ -43,7 +43,8 @@ public class DriverFactory {
 		System.out.println("browser name is : " + browserName);
 		switch (browserName.toLowerCase().trim()) {
 		case "chrome":
-			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			//if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			if(Boolean.parseBoolean(System.getProperty("remote"))) {
 				//run tc on remote machine/grid
 				initRemoteDriver("chrome");
 			}else {
@@ -52,7 +53,8 @@ public class DriverFactory {
 			}
 			break;
 		case "firefox":
-			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			//if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				if(Boolean.parseBoolean(System.getProperty("remote"))) {
 				//run tc on remote machine/grid
 				initRemoteDriver("firefox");
 			}else {
@@ -61,7 +63,8 @@ public class DriverFactory {
 			}
 			break;
 		case "edge":
-			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			//if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				if(Boolean.parseBoolean(System.getProperty("remote"))) {
 				//run tc on remote machine/grid
 				initRemoteDriver("edge");
 			}else {

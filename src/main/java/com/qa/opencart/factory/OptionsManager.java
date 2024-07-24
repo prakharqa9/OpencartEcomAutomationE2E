@@ -29,7 +29,8 @@ public class OptionsManager {
 			co.addArguments("--incognito");
 		}
 		
-		if (Boolean.parseBoolean(prop.getProperty("remote"))) {
+		if(Boolean.parseBoolean(System.getProperty("remote"))) {
+		//if (Boolean.parseBoolean(prop.getProperty("remote"))) {
 			co.setCapability("browserName", "chrome");
 			//co.setCapability("enableVNC", true);
 		}
@@ -48,7 +49,8 @@ public class OptionsManager {
 			fo.addArguments("--incognito");
 		}
 		
-		if (Boolean.parseBoolean(prop.getProperty("remote"))) {
+		if(Boolean.parseBoolean(System.getProperty("remote"))) {
+		//if (Boolean.parseBoolean(prop.getProperty("remote"))) {
 			fo.setCapability("browserName", "firefox");
 			//fo.setCapability("enableVNC", true);
 		}
@@ -68,7 +70,8 @@ public class OptionsManager {
 			eo.addArguments("--inPrivate");
 		}
 		
-		if (Boolean.parseBoolean(prop.getProperty("remote"))) {
+		if(Boolean.parseBoolean(System.getProperty("remote"))) {
+		//if (Boolean.parseBoolean(prop.getProperty("remote"))) {
 			eo.setCapability("browserName", "edge");
 			//eo.setCapability("enableVNC", true);
 		}
